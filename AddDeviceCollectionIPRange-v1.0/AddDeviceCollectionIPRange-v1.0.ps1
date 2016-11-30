@@ -30,7 +30,7 @@ $PSDrive = Get-PSDrive -PSProvider CMSite
 Set-Location "$($PSDrive):"
 
 #Intervalo de actualizacion
-$Schedule = New-CMSchedule –RecurInterval Days –RecurCount 7
+$Schedule = New-CMSchedule -RecurInterval Days -RecurCount 7
 
 #Limite de colecccion
 $LimitingCollection = "All Systems"
