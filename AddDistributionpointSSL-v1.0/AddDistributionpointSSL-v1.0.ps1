@@ -32,7 +32,7 @@ Set-Location "$($PSDrive):"
 
 #Variables generales
 $DPServers = Import-CSV $CSVfile
-$CA = 'coppel-PDCCOPPEL-CA' #Cambiar para incluir el nombre de la CA que firmara los certificados.
+$CA = 'CA-NAME' #Cambiar para incluir el nombre de la CA que firmara los certificados.
 $SCCMTemplate = 'SCCMDistributionPointCert' #Cambiar para incluir el nombre del template de certificado para Distribution point.
 $SiteCode = 'MEX' #Cambiar este valor por el codigo de sitio correspondiente
 $AllDPoints = 'MEX - All Distributions Points' #Cambiar para incluir el grupo que contiene a todos los DPs en el site, es necesario crearlo antes de ejecutar el script.
