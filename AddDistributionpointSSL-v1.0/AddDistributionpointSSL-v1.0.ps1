@@ -87,7 +87,7 @@ foreach ($line in $DPServers)
             Start-Sleep -Seconds 300 #Esperar 5 minutos para que termine el proceso de instalación para agregar DP a un DPGroup.
             
             #Crear Distribution point group
-            if (Get-CMDistributionPointGroup -SiteSystemServerName $DPGroup)
+            if (Get-CMDistributionPointGroup -Name $DPGroup)
             {
                 Write-Host "Agregando Distribution point a los grupos $DPGroup y $AllDPoints ..." -ForegroundColor Green
                 Add-CMDistributionPointToGroup -DistributionPointName $DPServer -DistributionPointGroupName $AllDPoints
