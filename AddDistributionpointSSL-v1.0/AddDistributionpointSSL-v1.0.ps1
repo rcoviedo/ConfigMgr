@@ -80,6 +80,7 @@ foreach ($line in $DPServers)
             Get-ChildItem cert:\localmachine\my | where {$_.thumbprint -eq "$thumbprint"} | Remove-Item -DeleteKey
 
             #Crear Distribution point
+            Set-Location "$($PSDrive):"
             New-CMSiteSystemServer -ServerName $DPServer -SiteCode $SiteCode
             Add-CMDistributionPoint -SiteSystemServerName $DPServer -SiteCode $SiteCode -CertificatePath $FilePath -CertificatePassword $secure_string_pwd -InstallInternetServer -EnableBranchCache -ClientConnectionType 'Intranet' -MinimumFreeSpaceMB '5120' -EnableValidateContent
             Write-Host "Instalando Distribution point en servidor $DPServer ..." -ForegroundColor Green
