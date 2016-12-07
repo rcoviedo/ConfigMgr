@@ -1,7 +1,9 @@
+	#Variables
+	
 	Import-Module activedirectory
 	$Password = ConvertTo-SecureString "Pass" –asplaintext –force
 	$DatabaseServer = 'FQDN-SQL'
-    $DBSrvNETBIOS = 'SingleNameSQL'
+    $SPN_DB = 'SingleNameSQL'
     $SCCMServer = 'FQDN-SCCM'
     $WSUSServer = 'FQDN-WSUS'
     
@@ -46,8 +48,8 @@
     
 	#SPN
 	
-	setspn -A MSSQLSvc/$DBSrvNETBIOS:1433 LOJASCOPPEL\SCCM_SQLServiceBR
+	setspn -A MSSQLSvc/$SPN_DB:1433 LOJASCOPPEL\SCCM_SQLServiceBR
 	setspn -A MSSQLSvc/$DatabaseServer:1433 LOJASCOPPEL\SCCM_SQLServiceBR
 	
-	#Busueda SPN
+	#Verificar SPN
     setspn SCCM_SQLServiceBR

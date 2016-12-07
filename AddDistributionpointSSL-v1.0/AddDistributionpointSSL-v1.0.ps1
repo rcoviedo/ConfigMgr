@@ -81,7 +81,7 @@ foreach ($line in $DPServers)
 
             #Crear Distribution point
             New-CMSiteSystemServer -ServerName $DPServer -SiteCode $SiteCode
-            Add-CMDistributionPoint -SiteSystemServerName $DPServer -SiteCode $SiteCode -CertificatePath $FilePath -CertificatePassword $secure_string_pwd -InstallInternetServer -EnableBranchCache -ClientConnectionType 'Intranet' -MinimumFreeSpaceMB '5120' -PrimaryContentLibraryLocation 'M' -PrimaryPackageShareLocation 'M' -EnableValidateContent
+            Add-CMDistributionPoint -SiteSystemServerName $DPServer -SiteCode $SiteCode -CertificatePath $FilePath -CertificatePassword $secure_string_pwd -InstallInternetServer -EnableBranchCache -ClientConnectionType 'Intranet' -MinimumFreeSpaceMB '5120' -EnableValidateContent
             Write-Host "Instalando Distribution point en servidor $DPServer ..." -ForegroundColor Green
             Start-Sleep -Seconds 300 #Esperar 5 minutos para que termine el proceso de instalación para agregar DP a un DPGroup.
             
