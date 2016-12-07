@@ -72,7 +72,7 @@ foreach ($line in $DPServers)
             $thumbprint = $cert.Certificate.Thumbprint
 
             #Exportar certificado en formato PFX
-            $secure_string_pwd = ConvertTo-SecureString -String "Valyrio1232811" -Force –AsPlainText
+            $secure_string_pwd = ConvertTo-SecureString -String "Valyrio1232811" -Force -AsPlainText
             Get-ChildItem cert:\localmachine\my | where {$_.thumbprint -eq "$thumbprint"} | Export-PfxCertificate -FilePath $FilePath -Password $secure_string_pwd
 
             #Remover certificado
@@ -88,16 +88,16 @@ foreach ($line in $DPServers)
             #Crear Distribution point group
             if (Get-CMDistributionPointGroup -SiteSystemServerName $DPGroup)
             {
-                Write-Host "Agregando Distribution point a los grupos $DPGroup & $AllDPoints ..." -ForegroundColor Green
+                Write-Host "Agregando Distribution point a los grupos $DPGroup y $AllDPoints ..." -ForegroundColor Green
                 Add-CMDistributionPointToGroup -DistributionPointName $DPServer -DistributionPointGroupName $AllDPoints
                 Add-CMDistributionPointToGroup -DistributionPointName $DPServer -DistributionPointGroupName $DPGroup
             }
             else
             {
                 Write-Host "Creando Distribution point group $DPGroup ..." -ForegroundColor Green
-                New-CMDistributionPointGroup –Name $DPGroup
+                New-CMDistributionPointGroup -Name $DPGroup
                 Start-Sleep -Seconds 30 #Esperar 30 segundos para que termine el proceso de creación del Distribution point group.
-                Write-Host "Agregando Distribution point a los grupos $DPGroup & $AllDPoints ..." -ForegroundColor Green
+                Write-Host "Agregando Distribution point a los grupos $DPGroup y $AllDPoints ..." -ForegroundColor Green
                 Add-CMDistributionPointToGroup -DistributionPointName $DPServer -DistributionPointGroupName $AllDPoints
                 Add-CMDistributionPointToGroup -DistributionPointName $DPServer -DistributionPointGroupName $DPGroup
             }
