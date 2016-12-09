@@ -4,8 +4,9 @@
 	$Password = ConvertTo-SecureString "Pass" –asplaintext –force
 	$DatabaseServer = 'FQDN-SQL'
     $SPN_DB = 'SingleNameSQL'
-    $SCCMServer = 'FQDN-SCCM'
-    $WSUSServer = 'FQDN-WSUS'
+    $SCCMServer = 'NETBIOS Computer'
+    $WSUSServer = 'NETBIOS Computer'
+	$DBServer = 'NETBIOS Computer'
     
 	#Usuarios
 	
@@ -43,13 +44,17 @@
 
 	Add-ADGroupMember -identity SCCM_AdminsBR -Members SCCM_AdminBra
     Add-ADGroupMember -identity 'Domain Admins' -Members SCCM_AdminBra
-    Add-ADGroupMember -identity SCCM_SitesServersBR -Members $SCCMServer, $DatabaseServer, $WSUSServer
-    Add-ADGroupMember -identity SCCM_WebServersBR -Members $SCCMServer, $DatabaseServer, $WSUSServer
+    Add-ADGroupMember -identity SCCM_SitesServersBR -Members $SCCMServer
+	Add-ADGroupMember -identity SCCM_SitesServersBR -Members $DBServer
+	Add-ADGroupMember -identity SCCM_SitesServersBR -Members $WSUSServer
+    Add-ADGroupMember -identity SCCM_WebServersBR -Members $SCCMServer
+	Add-ADGroupMember -identity SCCM_WebServersBR -Members $DBServer
+	Add-ADGroupMember -identity SCCM_WebServersBR -Members $WSUSServer
     
 	#SPN
 	
-	setspn -A MSSQLSvc/$SPN_DB:1433 LOJASCOPPEL\SCCM_SQLServiceBR
-	setspn -A MSSQLSvc/$DatabaseServer:1433 LOJASCOPPEL\SCCM_SQLServiceBR
+	setspn -A MSSQLSvc/''$SPN_DB':1433' LOJASCOPPEL\SCCM_SQLServiceBR
+	setspn -A MSSQLSvc/''$DatabaseServer':1433' LOJASCOPPEL\SCCM_SQLServiceBR
 	
 	#Verificar SPN
     setspn SCCM_SQLServiceBR
