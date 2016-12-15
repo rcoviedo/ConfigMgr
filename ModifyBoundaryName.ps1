@@ -21,7 +21,7 @@ foreach ($line in $Boundaries)
     
     $i = $i + 1
 	$pct = $i/$BoundariesCount * 100
-	Write-Progress -Activity "Procesando Distribution point" -Status "Distribution point $i de $BoundariesCount - $mb" -PercentComplete $pct
+	Write-Progress -Activity "Procesando Boundaries" -Status "Boundary $i de $BoundariesCount - $mb" -PercentComplete $pct
 
     $Boundary = $line.name
     $Newname = $line.newname
